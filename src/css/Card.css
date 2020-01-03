@@ -1,0 +1,62 @@
+.Card-tpl {
+    display: none;
+}
+
+.Card {
+    position: absolute;
+    width: 64px;
+    height: 90px;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #000;
+}
+
+.Card.diamonds svg path,
+.Card.hearts svg path {
+    fill: #D40100;
+}
+
+.Card svg {
+    position: absolute;
+}
+
+.Card svg:nth-child(1) {
+    top: 5px;
+    left: 5px;
+    height: 20px;
+}
+
+.Card svg:nth-child(2) {
+    top: 28px;
+    left: 5px;
+    height: 16px;
+}
+
+.Card.clubs svg:nth-child(2) {
+    left: 4px;
+}
+
+.Card svg:nth-child(3) {
+    bottom: 5px;
+    right: 6px;
+    height: 38px;
+}
+
+.Card.c1 { left: 30px; }
+.Card.c2 { left: calc(30px + 67px * 1); }
+.Card.c3 { left: calc(30px + 67px * 2); }
+.Card.c4 { left: calc(30px + 67px * 3); }
+.Card.c5 { left: calc(30px + 67px * 4); }
+.Card.c6 { left: calc(30px + 67px * 5); }
+.Card.c7 { left: calc(30px + 67px * 6); }
+.Card.c8 { left: calc(30px + 67px * 7); }
+.Card.c9 { left: calc(30px + 67px * 8); }
+.Card.c10 { left: calc(30px + 67px * 9); }
+.Card.c11 { left: calc(30px + 67px * 10); }
+.Card.c12 { left: calc(30px + 67px * 11); }
+.Card.c13 { left: calc(30px + 67px * 12); }
+
+.Card.r1 { top: 30px; }
+.Card.r2 { top: calc(30px + 93px * 1); }
+.Card.r3 { top: calc(30px + 93px * 2); }
+.Card.r4 { top: calc(30px + 93px * 3); }

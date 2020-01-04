@@ -2,30 +2,32 @@ class Card {
     constructor(props) {
         Object.assign(this, props);
 
-        const rank = Card.ranks[this.rank];
-        const suit = Card.suits[this.suit];
-        const pic = Card.pics[this.rank + '-' + this.suit];
+        const r = this.rank;
+        const s = this.suit;
+
+        const rank = Card.ranks[r];
+        const suit = Card.suits[s];
+
+        const isAce = r === 'ace';
+        const isPic = r === 'king' || r === 'queen' || r === 'jack';
 
         const classNames = [
             'Card',
             this.suit,
             this.rank,
+            this.faceDown ? 'back' : 'face',
         ];
-
-        if (pic) {
-            classNames.push('pic');
-        }
 
         this.node = Card.$new('div');
         this.node.className = classNames.concat(this.classNames || []).join(' ');
 
-        this.node.appendChild(rank.cloneNode(true));
-        this.node.appendChild(suit.cloneNode(true));
-
-        if (pic) {
-            this.node.appendChild(pic.cloneNode(true));
-        } else {
+        if (!this.faceDown) {
+            this.node.appendChild(rank.cloneNode(true));
             this.node.appendChild(suit.cloneNode(true));
+
+            if (!isPic && !isAce) {
+                this.node.appendChild(suit.cloneNode(true));
+            }
         }
 
         this.parent.appendChild(this.node);
@@ -54,13 +56,14 @@ Card.init = function() {
     const { $, svg } = Card;
 
     const suits = [
-        'clubs', // ♣
         'diamonds', // ♦
+        'clubs', // ♣
         'hearts', // ♥
         'spades', // ♠
     ];
 
     const ranks = [
+        'ace',
         'two',
         'three',
         'four',
@@ -73,14 +76,6 @@ Card.init = function() {
         'jack',
         'queen',
         'king',
-        'ace',
-    ];
-
-    const pics = [
-        'jc', 'qc', 'kc', // ♣
-        'jd', 'qd', 'kd', // ♦
-        'jh', 'qh', 'kh', // ♥
-        'js', 'qs', 'ks', // ♠
     ];
 
     Card.suits = {};
@@ -93,11 +88,5 @@ Card.init = function() {
 
     ranks.map(rank => {
         Card.ranks[rank] = svg($('.Card-tpl .' + rank));
-    });
-
-    Card.pics = {};
-
-    pics.map(pic => {
-        Card.pics[pic] = svg($('.Card-tpl .' + pic));
     });
 };

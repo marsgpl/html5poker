@@ -20,7 +20,7 @@
             let col = 1;
 
             Object.keys(Card.ranks).map(rank => {
-                const card = new Card({
+                cards.push(new Card({
                     rank,
                     suit,
                     parent,
@@ -28,9 +28,20 @@
                         'c' + col,
                         'r' + row,
                     ],
-                });
+                }));
 
-                cards.push(card);
+                if (col === 13) {
+                    cards.push(new Card({
+                        rank: 'two',
+                        suit,
+                        parent,
+                        faceDown: true,
+                        classNames: [
+                            'c' + (col + 1),
+                            'r' + row,
+                        ],
+                    }));
+                }
 
                 col++;
             });

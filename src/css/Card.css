@@ -12,7 +12,7 @@
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 }
 
-.Card.back:before {
+.Card.back:after {
     position: absolute;
     content: '';
     top: 3px;
@@ -20,6 +20,10 @@
     right: 3px;
     bottom: 3px;
     background: url("../img/back.svg") no-repeat center / cover;
+}
+
+.Card.back svg {
+    display: none;
 }
 
 .Card.face.diamonds svg > path,

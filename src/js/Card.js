@@ -2,15 +2,6 @@ class Card {
     constructor(props) {
         Object.assign(this, props);
 
-        const r = this.rank;
-        const s = this.suit;
-
-        const rank = Card.ranks[r];
-        const suit = Card.suits[s];
-
-        const isAce = r === 'ace';
-        const isPic = r === 'king' || r === 'queen' || r === 'jack';
-
         const classNames = [
             'Card',
             this.suit,
@@ -22,15 +13,51 @@ class Card {
         this.node.className = classNames.concat(this.classNames || []).join(' ');
 
         if (!this.faceDown) {
-            this.node.appendChild(rank.cloneNode(true));
-            this.node.appendChild(suit.cloneNode(true));
-
-            if (!isPic && !isAce) {
-                this.node.appendChild(suit.cloneNode(true));
-            }
+            this.addFaceNodes();
         }
 
         this.parent.appendChild(this.node);
+
+        this.node.addEventListener('click', this.flip.bind(this));
+    }
+
+    addFaceNodes() {
+        if (this.faceAdded) return;
+        this.faceAdded = true;
+
+        const r = this.rank;
+        const s = this.suit;
+
+        const rank = Card.ranks[r];
+        const suit = Card.suits[s];
+
+        const isAce = r === 'ace';
+        const isPic = r === 'king' || r === 'queen' || r === 'jack';
+
+        this.node.appendChild(rank.cloneNode(true));
+        this.node.appendChild(suit.cloneNode(true));
+
+        if (!isPic && !isAce) {
+            this.node.appendChild(suit.cloneNode(true));
+        }
+    }
+
+    flip() {
+        const clist = this.node.classList;
+
+        if (this.faceDown) {
+            clist.remove('back');
+            clist.add('face');
+        } else {
+            clist.remove('face');
+            clist.add('back');
+        }
+
+        this.faceDown = !this.faceDown;
+
+        if (!this.faceDown) {
+            this.addFaceNodes();
+        }
     }
 }
 
@@ -63,7 +90,6 @@ Card.init = function() {
     ];
 
     const ranks = [
-        'ace',
         'two',
         'three',
         'four',
@@ -76,6 +102,7 @@ Card.init = function() {
         'jack',
         'queen',
         'king',
+        'ace',
     ];
 
     Card.suits = {};

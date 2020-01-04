@@ -30,19 +30,6 @@
                     ],
                 }));
 
-                if (col === 13) {
-                    cards.push(new Card({
-                        rank: 'two',
-                        suit,
-                        parent,
-                        faceDown: true,
-                        classNames: [
-                            'c' + (col + 1),
-                            'r' + row,
-                        ],
-                    }));
-                }
-
                 col++;
             });
 

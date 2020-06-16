@@ -20,6 +20,7 @@
     right: 3px;
     bottom: 3px;
     background: url("../img/back.svg") no-repeat center / cover;
+    border-radius: 3px;
 }
 
 .Card.back svg {
